@@ -117,9 +117,13 @@ class CertificateValidator:
         :return: None
         """
         cn = self.get_cn(certificate)
-        if cn != app_id:
-            msg = f"App id {app_id} does not match cert CN {cn}"
-            raise CertificateAppIdMismatchException(msg)
+        master_cns = getattr(settings, 'MASTER_CERTIFICATE_CNS', [])
+        if cn == app_id:
+            return
+        if cn in master_cns:
+            return
+        msg = f"App id {app_id} does not match cert CN {cn}"
+        raise CertificateAppIdMismatchException(msg)
 
     def _to_cert(self, certificate: str) -> X509:
         try:

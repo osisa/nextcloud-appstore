@@ -13,6 +13,8 @@ tests/.coverage
 /build
 tests/report/
 venv
+.pyenv
+pyenv
 .idea/workspace.xml
 .idea/tasks.xml
 .idea/codeStyleSettings.xml

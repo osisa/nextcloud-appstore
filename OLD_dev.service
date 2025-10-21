@@ -1,0 +1,17 @@
+[Unit]
+Description=Nextcloud App Store Django Server
+After=network.target
+
+[Service]
+Type=simple
+WorkingDirectory=/srv/nextcloud-appstore
+ExecStart=/srv/nextcloud-appstore/.pyenv/versions/venv/bin/python manage.py runserver
+Restart=no
+User=www-data
+Group=www-data
+Environment=DJANGO_SETTINGS_MODULE=nextcloudappstore.settings.production
+Environment=PYENV_ROOT=/srv/nextcloud-appstore/.pyenv
+#Environment=PYTHONUNBUFFERED=1
+
+[Install] 
+WantedBy=multi-user.target

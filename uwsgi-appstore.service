@@ -1,0 +1,17 @@
+[Unit]
+Description=uWSGI Nextcloud Appstore
+After=network.target
+
+[Service]
+User=www-data
+Group=www-data
+WorkingDirectory=/srv/nextcloud-appstore
+Environment="DJANGO_SETTINGS_MODULE=nextcloudappstore.settings.production"
+Environment="PYENV_ROOT=/srv/nextcloud-appstore/.pyenv"
+Environment="PATH=/srv/nextcloud-appstore/.pyenv/versions/venv/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+Environment="LD_LIBRARY_PATH=/srv/nextcloud-appstore/.pyenv/versions/3.12.12/lib"
+ExecStart=/srv/nextcloud-appstore/.pyenv/versions/venv/bin/uwsgi --ini /srv/nextcloud-appstore/uwsgi.ini
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
